@@ -1,6 +1,7 @@
 {
   "name": "mongo-day1",
   "version": "0.1.0",
+  "main": "server/index.js",
   "private": true,
   "dependencies": {
     "react": "^16.8.6",
