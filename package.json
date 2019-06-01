@@ -2,9 +2,16 @@
   "name": "mongo-day1",
   "version": "0.1.0",
   "private": true,
+  "main": "server/index.js",
   "dependencies": {
+    "axios": "^0.19.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^0.19.1",
+    "mongoose": "^5.5.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-icons": "^3.7.0",
     "react-scripts": "3.0.1"
   },
   "scripts": {
