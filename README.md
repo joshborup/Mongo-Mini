@@ -47,3 +47,50 @@ app.listen(SERVER_PORT, () => {
 ```
 
 </details>
+
+## Step 2
+
+### Summary
+
+In this step, we'll install `mongoose` into our project and require it in `index.js`.
+
+### Instructions
+
+- Require and configure `dotenv` at the top of the file.
+- Require `express`.
+- Require `mongoose` underneath `express`.
+- Destructure `CONNECTION_STRING` from `process.env`;
+- Finally add a `.then` and pass in a callback function that will console log that the connection was successful
+
+### Solution
+
+<details>
+
+<summary> <code> customerController.js </code> </summary>
+
+```js
+module.exports = {
+  getAllCustomers: (req, res) => {
+    Customer.find({}).then(customers => {
+      res.status(200).send(customers);
+    });
+  },
+  postCustomer: (req, res) => {
+    const { name, email } = req.body;
+    // create a new Customer with your Customer schema and pass in the correct values
+    // when creating data, we dont want to write to the DB directly, we want to run this through our validators
+    const customer = new Customer({
+      name,
+      email
+    });
+
+    customer.save(err => {
+      Customer.find({}).then(customers => {
+        res.status(200).send(customers);
+      });
+    });
+  }
+};
+```
+
+</details>
