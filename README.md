@@ -10,7 +10,7 @@
 
 ### Summary
 
-In this step, we'll install massive into our project and require it in `index.js`.
+In this step, we'll install `mongoose` into our project and require it in `index.js`.
 
 ### Instructions
 
