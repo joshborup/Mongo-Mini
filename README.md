@@ -3,7 +3,6 @@
 ## Setup
 
 - `fork` and `clone` this repository.
-
 - `cd` into the project directory.
 - Run `npm i`
 - create a `.env` file in the root of your project folder with the appropriate values, use the `.env.example` as a reference
@@ -17,7 +16,6 @@ In this step, we'll install `mongoose` into our project and require it in `serve
 ### Instructions
 
 - Run `npm i mongoose`
-
 - Open `server/index.js`
 - Require `mongoose` and set it equal to `mongoose`.
 - Destructure `CONNECTION_STRING` from `process.env`;
@@ -96,19 +94,12 @@ A record in a MongoDB collection and the basic unit of data in MongoDB. Document
 ### Instructions
 
 - Start by creating a collections directory, with a file named `customer.js` inside.
-
   - the names of files are arbitrary but will help to follow the mini
-
 - Require mongoose at the top of the file and set it equal to `mongoose`.
-
-- declare a variable called `customerSchema` and set it equal to `new mongoose.Schema()` with an object that will represent how we would like our data to look, the object should have the following properties
-
+- declare a variable called `customerSchema` and set it equal to `new mongoose.Schema()` with an object passed in that will represent how we would like our data to look, the object should have the following properties
   - `name`: set equal to an object with a `type:String` property, and a `requried:true` property
-
   - `email`: set equal to an object with a `type:String` property, `requried:true` property, and a `unique:true`
-
   - `date_joined`: set equal to an object with a `type:Date` property, and a `default` property with a value of `Date().toLocaleString()`
-
 - export `mongoose.model("customer", customerSchema)`
   - collection names should be singular and lowercase
 
@@ -151,7 +142,6 @@ In this step, we'll begin setting up our endpoint handler functions, specificall
 ### Instructions
 
 - `cd` into `customerController.js`
-
 - require the customer collection (exported from step 2) at the top of the controller file and set it equal to `Customer`
   - convention is to capitalize a collection when importing and using it
 - We can use the find method on our collection to find specific entries, in this case we want all entries so we can just pass an empty object and it will return every document in our collection
