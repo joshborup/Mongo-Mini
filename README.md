@@ -1,5 +1,7 @@
 # Project Summary
 
+In this project, we will connect a server to our `mongoDB` database and set up our server's `CRUD` endpoints using `mongoose`. `mongoose` is an [ODM (object document mapper)](https://en.wikipedia.org/wiki/Object-relational_mapping#Object-oriented_databases)
+
 ## Setup
 
 - `fork` and `clone` this repository.
@@ -89,11 +91,9 @@ A record in a MongoDB collection and the basic unit of data in MongoDB. Document
 
 </details>
 
-### Vocab Solution
-
 ### Instructions
 
-- Start by creating a collections directory, with a file named `customer.js` inside.
+- Start by creating a `collections` directory, with a file named `customer.js` inside.
   - the names of files are arbitrary but will help to follow the mini
 - Require mongoose at the top of the file and set it equal to `mongoose`.
 - declare a variable called `customerSchema` and set it equal to `new mongoose.Schema()` with an object passed in that will represent how we would like our data to look, the object should have the following properties
@@ -137,14 +137,14 @@ module.exports = mongoose.model("customer", customerSchema);
 
 ### Summary
 
-In this step, we'll begin setting up our endpoint handler functions, specifically the function to read all of our customers from the customer collection collection
+In this step, we'll begin setting up our endpoint handler functions, specifically the function to read all of our customers from the customer collection.
 
 ### Instructions
 
 - `cd` into `customerController.js`
 - require the customer collection (exported from step 2) at the top of the controller file and set it equal to `Customer`
   - convention is to capitalize a collection when importing and using it
-- We can use the find method on our collection to find specific entries, in this case we want all entries so we can just pass an empty object and it will return every document in our collection
+- We can use the find method on our collection to find specific entries, in this case we want all entries so we can just pass an empty object and it will return every document in our customer collection
   - locate the `getAllCustomers` method and call `Customer.find()` and pass in an empty object
   - other common read queries are `findById` and `findOne`
 - Because the find method is a Promise, we can attach both a `.then` and a `.catch` and return the appropriate response
@@ -153,10 +153,10 @@ In this step, we'll begin setting up our endpoint handler functions, specificall
 
 <details>
 
-<summary> <code> server/customerController.js </code> </summary>
+<summary> <code> customerController.js </code> </summary>
 
 ```js
-const Customer = require("../Schema/customer");
+const Customer = require("../collections/customer");
 module.exports = {
   getAllCustomers: (req, res) => {
     Customer.find({}).then(customers => {
@@ -165,3 +165,57 @@ module.exports = {
   }
 };
 ```
+
+</details>
+
+## Step 4
+
+### Summary
+
+In this step, we'll set up our post endpoint handler function so that we can add new customers to our collection to be tracked.
+
+### Instructions
+
+- Locate the `postCustomer` method inside of `customerController.js`
+- Create a variable called customer and set it equal to a `new` instance of the customer schema with the `name` and `email` destructured from `req.body` passed in as properties on an object literal
+- invoke the `.save()` method on the customer variable
+- the `.save()` method in mongoose accepts a callback with what we would like to do after we have successfully saved our data.
+  - the callback will have one argument `err`
+- inside the logic of your callback, you will want to find all customers and `res.send` them back as the response.
+
+Data Flow:
+
+endpoint hit `=>` function handler runs `=>` new document inserted into the collection `=>` find all customers including the recently made customer and send to front
+
+### Solution
+
+<details>
+
+<summary> <code> customerController.js </code> </summary>
+
+```js
+const Customer = require("../collections/customer");
+module.exports = {
+  getAllCustomers: (req, res) => {
+    Customer.find({}).then(customers => {
+      res.status(200).send(customers);
+    });
+  },
+  postCustomer: (req, res) => {
+    const { name, email } = req.body;
+
+    const customer = new Customer({
+      name,
+      email
+    });
+
+    customer.save(err => {
+      Customer.find({}).then(customers => {
+        res.status(200).send(customers);
+      });
+    });
+  }
+};
+```
+
+</details>
