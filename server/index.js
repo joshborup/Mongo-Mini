@@ -12,7 +12,7 @@ const {
   deleteCustomer
 } = require("./controller/customerController");
 
-const { SERVER_PORT, CONNECTION_STRING } = process.env;
+const { SERVER_PORT } = process.env;
 
 app.get("/api/customer", getAllCustomers);
 
