@@ -7,6 +7,7 @@ In this project, we will connect a server to our `mongoDB` database and set up o
 - `fork` and `clone` this repository.
 - `cd` into the project directory.
 - Run `npm i`
+- run `npm start` and head over to [localhost 4000](http://localhost:4000) to get familiar with the project UI
 - create a `.env` file in the root of your project folder with the appropriate values, use the `.env.example` as a reference
 
 ## Step 1
@@ -228,13 +229,15 @@ In this step, we'll set up the ability to update documents within our collection
 
 ### Instructions
 
-- find the `updateCustomer` method in the `customerController.js`
-- call the `Customer` collection imported at the top and call `findById`
-  - convention is to capitalize a collection when importing and using it
-- We can use the find method on our collection to find specific entries, in this case we want all entries so we can just pass an empty object and it will return every document in our customer collection
-  - locate the `getAllCustomers` method and call `Customer.find()` and pass in an empty object
-  - other common read queries are `findById` and `findOne`
-- Because the find method is a Promise, we can attach both a `.then` and a `.catch` and return the appropriate response
+- Find the `updateCustomer` method in the `customerController.js`
+- Access the `Customer` collection imported at the top and call the `findById` method
+  - Pass in the `id` being sent back from `req.params`
+- Chain a `.then()` to the `findById` method and pass in a callback that will take in the found customer as an argument
+- access the `email` property on the found customer and set it equal to the email variable that is destructured from `req.query`
+- we can save these changes to the database by invoking the `.save()` method on the found customer like this `customer.save()`
+  - The `.save()` method accepts a callback that will have any errors encountered when attempting to save to our database passed in as an argument.
+  - if there is an error send an error message to the front
+- If there isnt an error, we will want to access the `Customer` collection and send back all of our customers to the front. (use your `getAllCustomers` method as an example on how to get all and send to the front)
 
 ### Solution
 
@@ -243,14 +246,95 @@ In this step, we'll set up the ability to update documents within our collection
 <summary> <code> customerController.js </code> </summary>
 
 ```js
-const Customer = require("../collections/customer");
-module.exports = {
-  getAllCustomers: (req, res) => {
-    Customer.find({}).then(customers => {
-      res.status(200).send(customers);
+updateCustomer(req, res, next) => {
+    const { id } = req.params;
+    const { email } = req.query;
+
+    Customer.findById(id).then(foundCustomer => {
+
+      foundCustomer.email = email;
+      foundCustomer.save(err => {
+        if(err) {
+          res.status(400).send('an error occurred when attempting to save your changes')
+        }
+        Customer.find({}).then(customers => {
+          res.status(200).send(customers);
+        });
+      });
     });
   }
-};
+```
+
+</details>
+
+## Step 6
+
+### Summary
+
+Were going to finish out our crud endpoints with our `delete`, we are going to access the built in methods on our collection, to find a customer by their id and delete them. Finally return all customers to the front
+
+### Instructions
+
+- Find the `deleteCustomer` method in the `customerController.js`
+- Access the `Customer` collection imported at the top and call the `findByIdAndDelete` method
+  - make sure to pass the id being destructured from `req.params` as an argument
+- Chain a `.then()` to the `findByIdAndDelete` method and pass in a callback that will take in the a variable holding info about the deletion that happened
+- Finally, access the `Customer` collection and send back all of our customers to the front. (use your `getAllCustomers` method as an example on how to get all and send to the front)
+
+### Solution
+
+<details>
+
+<summary> <code> customerController.js </code> </summary>
+
+```js
+deleteCustomer(req, res, next){
+    const { id } = req.params;
+    Customer.findByIdAndDelete(id).then(customer => {
+      Customer.find({}).then(customers => {
+        res.status(200).send(customers);
+      });
+    });
+  }
+```
+
+</details>
+
+## Step 7 (**Challenge**)
+
+### Summary
+
+Mongoose gives us the ability to add custom middleware and validators to check values being inserted prior to insertion
+
+Go explore the docs for mongoose middleware to get the information you need to complete the challenge below
+
+- [Mongoose Validation Docs](https://mongoosejs.com/docs/validation.html)
+
+- [Mongoose Middleware Docs](https://mongoosejs.com/docs/middleware.html)
+
+### Instructions
+
+- Find the `deleteCustomer` method in the `customerController.js`
+- Access the `Customer` collection imported at the top and call the `findByIdAndDelete` method
+  - make sure to pass the id being destructured from `req.params` as an argument
+- Chain a `.then()` to the `findByIdAndDelete` method and pass in a callback that will take in the a variable holding info about the deletion that happened
+- Finally, access the `Customer` collection and send back all of our customers to the front. (use your `getAllCustomers` method as an example on how to get all and send to the front)
+
+### Solution
+
+<details>
+
+<summary> <code> customerController.js </code> </summary>
+
+```js
+deleteCustomer(req, res, next){
+    const { id } = req.params;
+    Customer.findByIdAndDelete(id).then(customer => {
+      Customer.find({}).then(customers => {
+        res.status(200).send(customers);
+      });
+    });
+  }
 ```
 
 </details>
