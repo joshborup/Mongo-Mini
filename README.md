@@ -219,3 +219,38 @@ module.exports = {
 ```
 
 </details>
+
+## Step 5
+
+### Summary
+
+In this step, we'll set up the ability to update documents within our collection, specifically the email address of our customer.
+
+### Instructions
+
+- find the `updateCustomer` method in the `customerController.js`
+- call the `Customer` collection imported at the top and call `findById`
+  - convention is to capitalize a collection when importing and using it
+- We can use the find method on our collection to find specific entries, in this case we want all entries so we can just pass an empty object and it will return every document in our customer collection
+  - locate the `getAllCustomers` method and call `Customer.find()` and pass in an empty object
+  - other common read queries are `findById` and `findOne`
+- Because the find method is a Promise, we can attach both a `.then` and a `.catch` and return the appropriate response
+
+### Solution
+
+<details>
+
+<summary> <code> customerController.js </code> </summary>
+
+```js
+const Customer = require("../collections/customer");
+module.exports = {
+  getAllCustomers: (req, res) => {
+    Customer.find({}).then(customers => {
+      res.status(200).send(customers);
+    });
+  }
+};
+```
+
+</details>
