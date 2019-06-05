@@ -102,6 +102,15 @@ app.listen(SERVER_PORT, () => {
 
 In this step we'll begin by modeling our data structure. We can do this by writing a schema and giving that to mongoose so it knows how to build documents with the data we pass in.
 
+Because we are using an [ORM/ODM](https://en.wikipedia.org/wiki/Object-relational_mapping) which will map the data to our language of choice, we can use the built in JavaScript types to define what specific data types we should expect when entering in out data
+
+- String,
+- Number,
+- Date,
+- Boolean,
+- ObjectId (mongo datatype and the default type for primary keys),
+- Array
+
 ---
 
 Terms to know
