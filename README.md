@@ -41,7 +41,7 @@ MongoDB is a [Document Oriented database](https://en.wikipedia.org/wiki/Document
 ## Project Summary
 
 **Note:**
-This project assumes you have already set up a mongoDB server on [MongoDb.com](https://www.mongodb.com/cloud/atlas) through atlas and have a connection string
+This project assumes you have already set up a mongoDB server on [MongoDb.com](https://www.mongodb.com/cloud/atlas) through atlas and have a connection string with your networks IP address whitelisted, you can alternatively set up mongo on your local machine and use that.
 
 In this project, we will connect a server to our `mongoDB` database and set up our server's `CRUD` endpoints using `mongoose`. `mongoose` is an [ODM (object document mapper)](https://en.wikipedia.org/wiki/Object-relational_mapping#Object-oriented_databases)
 
