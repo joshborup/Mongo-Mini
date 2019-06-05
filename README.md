@@ -88,7 +88,13 @@ A grouping of MongoDB documents. A collection is the equivalent of an SQL table.
 
 <summary>Document</summary>
 
-A record in a MongoDB collection and the basic unit of data in MongoDB. Documents are analogous to JSON objects but exist in the database in a more type-rich format known as BSON.
+A record in MongoDB is a document, which is a data structure composed of field and value pairs. MongoDB documents are similar to JSON objects. The values of fields may include other documents, arrays, and arrays of documents.
+
+The advantages of using documents are:
+
+- Documents (i.e. objects) correspond to native data types in many programming languages.
+- Embedded documents and arrays reduce need for expensive joins.
+- Dynamic schema supports documents with different key and value pairs existing in the same collection.
 
 </details>
 
