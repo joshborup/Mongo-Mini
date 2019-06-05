@@ -41,7 +41,7 @@ MongoDB is a [Document Oriented database](https://en.wikipedia.org/wiki/Document
 ## Project Summary
 
 **Note:**
-This project assumes you have already set up a mongoDB server on [MongoDb.com](https://www.mongodb.com/cloud/atlas) through atlas and have a connection string with your networks IP address whitelisted, you can alternatively set up mongo on your local machine and use that.
+This project assumes you have already set up a mongoDB server on [MongoDb.com](https://www.mongodb.com/cloud/atlas) using [The Atlas Setup Guide](https://github.com/joshborup/MongoDB-Atlas-Setup) and have a connection string with your networks IP address whitelisted, you can alternatively set up mongo on your local machine and use that.
 
 In this project, we will connect a server to our `mongoDB` database and set up our server's `CRUD` endpoints using `mongoose`. `mongoose` is an [ODM (object document mapper)](https://en.wikipedia.org/wiki/Object-relational_mapping#Object-oriented_databases)
 
@@ -421,4 +421,5 @@ const customerSchema = mongoose.Schema({
 ## Contributions
 
 If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so I can review your changes and merge them into the master repo and branch.
+
 # MongoDB-Atlas-Setup
