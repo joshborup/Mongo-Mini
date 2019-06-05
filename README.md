@@ -14,6 +14,8 @@ MongoDB is a [Document Oriented database](https://en.wikipedia.org/wiki/Document
 - Better horizonal scaling when it comes to larger applications that have a alot of data
 - Eliminates the need for expensive join operations
 
+**Note:** Your application's needs should drive which type of database you use, as NoSQL and SQL have added benefits and drawbacks depending on the scope of the application. If you are unsure which solution is best for you, you can reference this guide [Choosing a data store](./Choosing.pdf)
+
 ### Vocab
 
 **Mongodb** - is an open source database management system (DBMS) that uses a document-oriented database model which supports various forms of data.
