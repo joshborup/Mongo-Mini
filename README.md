@@ -300,7 +300,7 @@ deleteCustomer(req, res, next){
 
 </details>
 
-## Step 7 (**Challenge**)
+## Step 8 Validation
 
 ### Summary
 
@@ -314,27 +314,33 @@ Go explore the docs for mongoose middleware to get the information you need to c
 
 ### Instructions
 
-- Find the `deleteCustomer` method in the `customerController.js`
-- Access the `Customer` collection imported at the top and call the `findByIdAndDelete` method
-  - make sure to pass the id being destructured from `req.params` as an argument
-- Chain a `.then()` to the `findByIdAndDelete` method and pass in a callback that will take in the a variable holding info about the deletion that happened
-- Finally, access the `Customer` collection and send back all of our customers to the front. (use your `getAllCustomers` method as an example on how to get all and send to the front)
-
 ### Solution
 
 <details>
 
-<summary> <code> customerController.js </code> </summary>
+<summary> <code> customer.js </code> </summary>
 
 ```js
-deleteCustomer(req, res, next){
-    const { id } = req.params;
-    Customer.findByIdAndDelete(id).then(customer => {
-      Customer.find({}).then(customers => {
-        res.status(200).send(customers);
-      });
-    });
+const customerSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: [true],
+    unique: [true, "That user"],
+    validate: {
+      validator: function(str) {
+        return str.includes("@");
+      }
+    }
+  },
+  date_joined: {
+    type: Date,
+    default: Date()
   }
+});
 ```
 
 </details>
