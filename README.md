@@ -1,4 +1,8 @@
-# Project Summary
+# MongoDB mini
+
+<img src='./mongologo.png'/>
+
+## Project Summary
 
 In this project, we will connect a server to our `mongoDB` database and set up our server's `CRUD` endpoints using `mongoose`. `mongoose` is an [ODM (object document mapper)](https://en.wikipedia.org/wiki/Object-relational_mapping#Object-oriented_databases)
 
