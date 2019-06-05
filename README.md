@@ -31,7 +31,7 @@ MongoDB is a [Document Oriented database](https://en.wikipedia.org/wiki/Document
 | Mongo                   |       **server**        |                PostgreSQL |
 | database                |      **database**       |                  database |
 | collection              |  **grouping of data**   |                     table |
-| document                |    **single entry**     |                       row |
+| document                |  **individual record**  |                       row |
 | field                   | **single unit of data** |                    column |
 
 ## Project Summary
