@@ -2,7 +2,42 @@
 
 <img src='./mongologo.png'/>
 
+### What?
+
+MongoDB is a [Document Oriented database](https://en.wikipedia.org/wiki/Document-oriented_database) which is another way to say we can store our application's data in a JSON-like document format
+
+### Why?
+
+- The document model maps to the objects in your application code, making data easy to work with
+- Free to use
+- Data in MongoDB has a flexible schema. insertions are enforced at the Schema level which can be updated on the fly, this allows us to dynamically modify the schema without downtime.
+
+### Vocab
+
+**Mongodb** - is an open source database management system (DBMS) that uses a document-oriented database model which supports various forms of data.
+
+**Database** - a structured set of data held in a computer, especially one that is accessible in various ways
+
+**Collection** - A grouping of MongoDB documents. A collection is the equivalent of an `RDBMS` table. A collection exists within a single database.
+
+**Document** - A record in a MongoDB `collection` and the basic unit of data in MongoDB. `Documents` are analogous to `JSON` objects but exist in the database in a more type-rich format known as `BSON`.
+
+**field** - A name-value pair in a document. A document has zero or more fields. Fields are analogous to columns in relational databases.
+
+### Data structure comparisons to SQL
+
+| Document Based Database |       comparison        | Relational based Database |
+| ----------------------- | :---------------------: | ------------------------- |
+| Mongo                   |       **server**        | PostgreSQL                |
+| database                |      **database**       | database                  |
+| collection              |  **grouping of data**   | table                     |
+| document                |    **single entry**     | row                       |
+| field                   | **single unit of data** | column                    |
+
 ## Project Summary
+
+**Note:**
+This project assumes you have already set up a mongoDB server on [MongoDb.com](https://www.mongodb.com/cloud/atlas) through atlas and have a connection string
 
 In this project, we will connect a server to our `mongoDB` database and set up our server's `CRUD` endpoints using `mongoose`. `mongoose` is an [ODM (object document mapper)](https://en.wikipedia.org/wiki/Object-relational_mapping#Object-oriented_databases)
 
