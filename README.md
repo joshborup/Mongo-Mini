@@ -300,7 +300,7 @@ deleteCustomer(req, res, next){
 
 </details>
 
-## Step 8 Validation
+## Step 7 Validation
 
 ### Summary
 
