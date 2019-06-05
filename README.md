@@ -100,7 +100,7 @@ The advantages of using documents are:
 
 ### Instructions
 
-- Start by creating a `collections` directory, with a file named `customer.js` inside.
+- Start by creating a `collections` directory inside of the `server`, with a file named `customer.js` inside.
   - the names of files are arbitrary but will help to follow the mini
 - Require mongoose at the top of the file and set it equal to `mongoose`.
 - declare a variable called `customerSchema` and set it equal to `new mongoose.Schema()` with an object passed in that will represent how we would like our data to look, the object should have the following properties
@@ -166,9 +166,11 @@ In this step, we'll begin setting up our endpoint handler functions, specificall
 const Customer = require("../collections/customer");
 module.exports = {
   getAllCustomers: (req, res) => {
-    Customer.find({}).then(customers => {
-      res.status(200).send(customers);
-    });
+    Customer.find({})
+      .then(customers => {
+        return res.status(200).send(customers);
+      })
+      .catch(err => console.log(err));
   }
 };
 ```
@@ -186,8 +188,9 @@ In this step, we'll set up our post endpoint handler function so that we can add
 - Locate the `postCustomer` method inside of `customerController.js`
 - Create a variable called customer and set it equal to a `new` instance of the customer schema with the `name` and `email` destructured from `req.body` passed in as properties on an object literal
 - invoke the `.save()` method on the customer variable
-- the `.save()` method in mongoose accepts a callback with what we would like to do after we have successfully saved our data.
+- the `.save()` method in mongoose accepts a callback with what we would like to do after we have successfully updated our found customer document.
   - the callback will have one argument `err`
+  - write an if statement to send an error back if an error exists, otherwise we will send the found customers
 - inside the logic of your callback, you will want to find all customers and `res.send` them back as the response.
 
 Data Flow:
@@ -217,6 +220,11 @@ module.exports = {
     });
 
     customer.save(err => {
+      if (err) {
+        res
+          .status(200)
+          .send("there was an error when attempting to modify this resource");
+      }
       Customer.find({}).then(customers => {
         res.status(200).send(customers);
       });
@@ -296,7 +304,7 @@ Were going to finish out our crud endpoints with our `delete`, we are going to a
 ```js
 deleteCustomer(req, res, next){
     const { id } = req.params;
-    Customer.findByIdAndDelete(id).then(customer => {
+    Customer.findByIdAndDelete(id).then(deletedCustomer => {
       Customer.find({}).then(customers => {
         res.status(200).send(customers);
       });
@@ -343,8 +351,8 @@ const customerSchema = mongoose.Schema({
     required: true,
     unique: true,
     validate: {
-      validator: function(str) {
-        const validEmail = str.includes("@");
+      validator: function(email) {
+        const validEmail = email.includes("@");
         return validEmail;
       }
     }
