@@ -314,6 +314,12 @@ Go explore the docs for mongoose middleware to get the information you need to c
 
 ### Instructions
 
+- Open `collections/customer.js` and locate the email property on the customer schema
+- Add a `validate` property to the email configuration object and set it equal to an object
+- The validate object should have a propery called validator and that is set equal to a function
+  - the function will have an argument passed in that will represent the email that needs to be validated
+  - check to see if the passed in email string contains an "`@`" symbol, if it does, return true, otherwise return false
+
 ### Solution
 
 <details>
@@ -328,11 +334,12 @@ const customerSchema = mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true],
-    unique: [true, "That user"],
+    required: true,
+    unique: true,
     validate: {
       validator: function(str) {
-        return str.includes("@");
+        const validEmail = str.includes("@");
+        return validEmail;
       }
     }
   },
