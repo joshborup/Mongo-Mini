@@ -27,12 +27,12 @@ MongoDB is a [Document Oriented database](https://en.wikipedia.org/wiki/Document
 ### Data structure comparisons to SQL
 
 | Document Based Database |       comparison        | Relational based Database |
-| ----------------------- | :---------------------: | ------------------------- |
-| Mongo                   |       **server**        | PostgreSQL                |
-| database                |      **database**       | database                  |
-| collection              |  **grouping of data**   | table                     |
-| document                |    **single entry**     | row                       |
-| field                   | **single unit of data** | column                    |
+| :---------------------- | :---------------------: | ------------------------: |
+| Mongo                   |       **server**        |                PostgreSQL |
+| database                |      **database**       |                  database |
+| collection              |  **grouping of data**   |                     table |
+| document                |    **single entry**     |                       row |
+| field                   | **single unit of data** |                    column |
 
 ## Project Summary
 
