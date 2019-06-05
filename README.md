@@ -11,6 +11,8 @@ MongoDB is a [Document Oriented database](https://en.wikipedia.org/wiki/Document
 - The document model maps to the objects in your application code, making data easy to work with
 - Free to use
 - Data in MongoDB has a flexible schema. insertions are enforced at the Schema level which can be updated on the fly, this allows us to dynamically modify the schema without downtime.
+- Better horizonal scaling when it comes to larger applications that have a alot of data
+- Eliminates the need for expensive join operations
 
 ### Vocab
 
